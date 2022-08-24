@@ -9,10 +9,25 @@ config.read(configFile)
 print(config.sections())
 print(list(config['preferences']))
 
-nameInput = input("What is your first name?: ")
+nameConfig = config['preferences']
 
-config.set('preferences', 'name', nameInput)
+if ((nameConfig['name']) == "null"):
+    nameInput = input("What is your first name?: ")
+    
+    config.set('preferences', 'name', nameInput)
+    with open(configFile, 'w') as configWrite:
+        config.write(configWrite)
+else:
+    print("Hello " + (config['preferences']['name']))
+
+locInput = input("What city are you in?: ")
+
+config.set('preferences', 'location', locInput)
 with open(configFile, 'w') as configWrite:
     config.write(configWrite)
+    
+locConfig = config['preferences']
 
-print((config['preferences']['name']) + " " + config['preferences']['location'])
+urlWeather = "https://www.google.com/search?q=" + "weather" + (locConfig['location'])
+
+print(urlWeather)
