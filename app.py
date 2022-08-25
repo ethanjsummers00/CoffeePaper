@@ -3,6 +3,8 @@ import configparser
 from distutils.command.config import config
 import requests
 from bs4 import BeautifulSoup
+from factArray import funFacts
+import pandas
 
 configFile = 'config.ini'
 config = ConfigParser()
@@ -61,3 +63,8 @@ print("Temperature is", temp)
 print("Time: ", time)
 print("Sky Description: ", sky)
 print(other_data)
+
+data = pandas.read_csv("funFacts.csv", header=0)
+col_a = list(data.Facts)
+
+print(col_a)
