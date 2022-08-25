@@ -3,7 +3,6 @@ import configparser
 from distutils.command.config import config
 import requests
 from bs4 import BeautifulSoup
-from factArray import funFacts
 import pandas
 
 configFile = 'config.ini'
