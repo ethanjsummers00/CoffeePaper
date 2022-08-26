@@ -4,6 +4,8 @@ from distutils.command.config import config
 import requests
 from bs4 import BeautifulSoup
 import pandas
+import secrets
+import pyfiglet
 
 configFile = 'config.ini'
 config = ConfigParser()
@@ -11,6 +13,9 @@ config.read(configFile)
 
 # print(config.sections())
 # print(list(config['preferences']))
+
+ASCII_art_1 = pyfiglet.figlet_format("CoffeePaper")
+print(ASCII_art_1)
 
 pullConfig = config['preferences']
 
@@ -35,8 +40,10 @@ if ((pullConfig['location']) == "null"):
         config.write(configWrite)
     
     urlWeather = "https://www.google.com/search?q=" + "weather" + (pullConfig['location'])    
+    
+    print('\n')
 else:
-    print(urlWeather)
+    print("------------")
 
 html = requests.get(urlWeather).content
 soup = BeautifulSoup(html, 'html.parser')
@@ -58,12 +65,13 @@ strd = listdiv[5].text
 pos = strd.find('Wind')
 other_data = strd[pos:]
 
-print("Temperature is", temp)
 print("Time: ", time)
+print("Temperature is", temp)
 print("Sky Description: ", sky)
-print(other_data)
 
 data = pandas.read_csv("funFacts.csv", header=0)
 col_a = list(data.Facts)
 
-print(col_a)
+print("------------")
+print("Fun fact of the day: " + (secrets.choice(col_a)))
+print('\n')
