@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 import pandas
 import secrets
 import pyfiglet
+from colorama import Fore, Back, Style
 
 configFile = 'config.ini'
 config = ConfigParser()
@@ -16,10 +17,11 @@ config.read(configFile)
 # print(list(config['preferences']))
 
 ASCII_art_1 = pyfiglet.figlet_format("CoffeePaper")
-print(ASCII_art_1)
+print(Fore.RED + ASCII_art_1 + Style.RESET_ALL)
 
 pullConfig = config['preferences']
 
+# modifies name in config
 if ((pullConfig['name']) == "null"):
     nameInput = input("What is your first name?: ")
     
@@ -33,6 +35,7 @@ else:
 
 urlWeather = "https://www.google.com/search?q=" + "weather" + (pullConfig['location'])
 
+# modifies location in config
 if ((pullConfig['location']) == "null"):
     locInput = input("What city are you in?: ")
     
@@ -56,21 +59,15 @@ data = str.split('\n')
 time = data[0]
 sky = data[1]
 
-# list having all div tags having particular clas sname
+# list having all div tags with a specific class
 listdiv = soup.findAll('div', attrs={'class': 'BNeawe s3v9rd AP7Wnd'})
 
 # particular list with required data
 strd = listdiv[5].text
 
-# formatting the string
-pos = strd.find('Wind')
-other_data = strd[pos:]
-
-# print(temp)
-# print('ing' in temp)
-
 print("Time:", time)
-if 'arning' in temp:
+# looking for an alert or warning in the temperature class
+if 'arning' in temp or 'ert' in temp:
     print("!!Alert!!", temp)
 else:
     print("Temperature:", temp)
