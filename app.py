@@ -1,6 +1,7 @@
 from configparser import ConfigParser
 import configparser
 from distutils.command.config import config
+from operator import contains
 import requests
 from bs4 import BeautifulSoup
 import pandas
@@ -65,9 +66,15 @@ strd = listdiv[5].text
 pos = strd.find('Wind')
 other_data = strd[pos:]
 
-print("Time: ", time)
-print("Temperature is", temp)
-print("Sky Description: ", sky)
+# print(temp)
+# print('ing' in temp)
+
+print("Time:", time)
+if 'arning' in temp:
+    print("!!Alert!!", temp)
+else:
+    print("Temperature:", temp)
+print("Sky Description:", sky)
 
 data = pandas.read_csv("funFacts.csv", header=0)
 col_a = list(data.Facts)
