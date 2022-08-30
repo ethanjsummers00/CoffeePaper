@@ -1,5 +1,7 @@
+#!/usr/bin/env python3
+# app.py
+
 from configparser import ConfigParser
-import configparser
 from distutils.command.config import config
 from operator import contains
 import requests
@@ -9,17 +11,17 @@ import secrets
 import pyfiglet
 from colorama import Fore, Back, Style
 
-configFile = 'config.ini'
+configFile = 'config/config.ini'
 config = ConfigParser()
 config.read(configFile)
+
+pullConfig = config['preferences']
 
 # print(config.sections())
 # print(list(config['preferences']))
 
 ASCII_art_1 = pyfiglet.figlet_format("CoffeePaper")
-print(Fore.RED + ASCII_art_1 + Style.RESET_ALL)
-
-pullConfig = config['preferences']
+print(Fore.YELLOW + ASCII_art_1 + Style.RESET_ALL)
 
 # modifies name in config
 if ((pullConfig['name']) == "null"):
