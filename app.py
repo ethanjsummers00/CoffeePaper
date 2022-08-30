@@ -11,10 +11,9 @@ import secrets
 import pyfiglet
 from colorama import Fore, Back, Style
 
-configFile = 'config/config.ini'
+configFile = 'config.ini'
 config = ConfigParser()
 config.read(configFile)
-
 pullConfig = config['preferences']
 
 # print(config.sections())
@@ -70,7 +69,7 @@ strd = listdiv[5].text
 print("Time:", time)
 # looking for an alert or warning in the temperature class
 if 'arning' in temp or 'ert' in temp:
-    print("!!Alert!!", temp)
+    print(Fore.RED + "!!Alert!!"+ Style.RESET_ALL, temp)
 else:
     print("Temperature:", temp)
 print("Sky Description:", sky)
