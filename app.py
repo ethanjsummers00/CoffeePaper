@@ -3,6 +3,7 @@
 
 from configparser import ConfigParser
 from distutils.command.config import config
+from logging.config import listen
 from operator import contains
 import requests
 from bs4 import BeautifulSoup
@@ -56,6 +57,13 @@ soup = BeautifulSoup(html, 'html.parser')
 temp = soup.find('div', attrs={'class': 'BNeawe iBp4i AP7Wnd'}).text
 str = soup.find('div', attrs={'class': 'BNeawe tAd8D AP7Wnd'}).text
 
+editList = ["National", "Weather", "Service" , "Enviornment"]
+for word in editList:
+    temp = temp.replace(word, "------------")
+
+tempEdit = temp[:61] + '\n' + "Temperature: " + temp[62:]
+# print(tempEdit)
+
 data = str.split('\n')
 time = data[0]
 sky = data[1]
@@ -69,7 +77,7 @@ strd = listdiv[5].text
 print("Time:", time)
 # looking for an alert or warning in the temperature class
 if 'arning' in temp or 'ert' in temp:
-    print(Fore.RED + "!!Alert!!"+ Style.RESET_ALL, temp)
+    print(Fore.RED + "!!Alert!!"+ Style.RESET_ALL, tempEdit)
 else:
     print("Temperature:", temp)
 print("Sky Description:", sky)
