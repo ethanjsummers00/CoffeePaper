@@ -82,6 +82,12 @@ else:
     print("Temperature:", temp)
 print("Sky Description:", sky)
 
+if 'unny' in sky:
+    print(Fore.YELLOW + "\n   \ | / \n    .-.\n-- (   ) --\n    `-'\n   / | \ \n" + Style.RESET_ALL)
+elif 'ain' in sky:
+    print(Fore.BLUE + "\n\ \ \ \n \  \ \n \ \ \ \n" + Style.RESET_ALL)
+elif 'oudy' in sky:
+    print(Fore.WHITE + "     _\n   _( )_\n _(     )_\n(_________)\n" + Style.RESET_ALL)
 data = pandas.read_csv("funFacts.csv", header=0)
 col_a = list(data.Facts)
 
