@@ -17,9 +17,6 @@ config = ConfigParser()
 config.read(configFile)
 pullConfig = config['preferences']
 
-# print(config.sections())
-# print(list(config['preferences']))
-
 ASCII_art_1 = pyfiglet.figlet_format("CoffeePaper")
 print(Fore.YELLOW + ASCII_art_1 + Style.RESET_ALL)
 
@@ -45,6 +42,7 @@ if ((pullConfig['location']) == "null"):
     with open(configFile, 'w') as configWrite:
         config.write(configWrite)
     
+    #searches google weather for location set in config
     urlWeather = "https://www.google.com/search?q=" + "weather" + (pullConfig['location'])    
     
     print('\n')
@@ -54,6 +52,7 @@ else:
 html = requests.get(urlWeather).content
 soup = BeautifulSoup(html, 'html.parser')
 
+# pulls weather data from the loaded page
 temp = soup.find('div', attrs={'class': 'BNeawe iBp4i AP7Wnd'}).text
 str = soup.find('div', attrs={'class': 'BNeawe tAd8D AP7Wnd'}).text
 
@@ -82,12 +81,17 @@ else:
     print("Temperature:", temp)
 print("Sky Description:", sky)
 
+#ASCII weather output
 if 'unny' in sky:
     print(Fore.YELLOW + "\n   \ | / \n    .-.\n-- (   ) --\n    `-'\n   / | \ \n" + Style.RESET_ALL)
 elif 'ain' in sky:
     print(Fore.BLUE + "\n\ \ \ \n \  \ \n \ \ \ \n" + Style.RESET_ALL)
 elif 'oudy' in sky:
     print(Fore.WHITE + "     _\n   _( )_\n _(     )_\n(_________)\n" + Style.RESET_ALL)
+elif 'lear' in sky:
+    print("    _...\n  .::'   \n :::       \n :::       \n `::.     \n   `::..-'\n")
+elif 'now' in sky:
+    print("Snow")
 data = pandas.read_csv("funFacts.csv", header=0)
 col_a = list(data.Facts)
 
