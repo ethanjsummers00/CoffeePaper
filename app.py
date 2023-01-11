@@ -98,3 +98,11 @@ col_a = list(data.Facts)
 print("------------")
 print("Fun fact of the day: " + (secrets.choice(col_a)))
 print('\n')
+
+newsInput = input("Would you like to see today's headlines? (y or n): ")
+if(newsInput == "y"):
+    print("Okay!")
+elif(newsInput == "n"):
+    print("Boo!")
+else:
+    newsInput = input("(y or n): ")
