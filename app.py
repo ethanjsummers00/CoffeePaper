@@ -99,10 +99,14 @@ print("------------")
 print("Fun fact of the day: " + (secrets.choice(col_a)))
 print('\n')
 
-newsInput = input("Would you like to see today's headlines? (y or n): ")
-if(newsInput == "y"):
+while True:
+    newsInput = input("Would you like to see today's headlines? (y or n): ")
+    if newsInput.lower() not in ('y', 'n', 'Y', 'N'):
+        print("invalid choice")
+    else:
+        break
+    
+if(newsInput == "y" or newsInput == "Y"):
     print("Okay!")
-elif(newsInput == "n"):
+elif(newsInput == "n" or newsInput == "N"):
     print("Boo!")
-else:
-    newsInput = input("(y or n): ")
